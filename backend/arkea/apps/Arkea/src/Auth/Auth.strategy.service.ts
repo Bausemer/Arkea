@@ -7,12 +7,13 @@ import { PassportStrategy } from '@nestjs/passport';
 import { RedisService } from '~libs/Redis/Redis.service';
 
 import { JwtPayload } from './DTOs/JwtPayload.dto';
+import { User } from './DTOs/User.dto';
 
 @Injectable()
 export class AzureADStrategy_Service extends PassportStrategy(Strategy, 'aad') {
 
   constructor (
-    private readonly redis: RedisService<string, string>,
+    private readonly redis: RedisService<string, User>,
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -21,9 +22,9 @@ export class AzureADStrategy_Service extends PassportStrategy(Strategy, 'aad') {
   }
 
   async validate (payload: JwtPayload): Promise<string> {
-    const aadToken = this.redis.getOrSetCacheData(payload.username);
-    if (!aadToken) throw new UnauthorizedException();
+    const user = await this.redis.getOrSetCacheData(payload.username);
+    if ( !user.username ) throw new UnauthorizedException();
 
-    return aadToken;
+    return user.username;
   }
 }
