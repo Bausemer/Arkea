@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/arkea/src",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/arkea/tsconfig.app.json"
+  },
+  "monorepo": true,
+  "root": "apps/arkea",
+  "projects": {
+    "arkea": {
+      "type": "application",
+      "root": "apps/arkea",
+      "entryFile": "main",
+      "sourceRoot": "apps/arkea/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/arkea/tsconfig.app.json"
+      }
+    },
+    "characters": {
+      "type": "application",
+      "root": "apps/characters",
+      "entryFile": "main",
+      "sourceRoot": "apps/characters/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/characters/tsconfig.app.json"
+      }
+    },
+    "auth": {
+      "type": "application",
+      "root": "apps/auth",
+      "entryFile": "main",
+      "sourceRoot": "apps/auth/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/auth/tsconfig.app.json"
+      }
+    },
+    "abstractDatabase": {
+      "type": "library",
+      "root": "libs/abstractDatabase",
+      "entryFile": "index",
+      "sourceRoot": "libs/abstractDatabase/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/abstractDatabase/tsconfig.lib.json"
+      }
+    }
+  }
+}
