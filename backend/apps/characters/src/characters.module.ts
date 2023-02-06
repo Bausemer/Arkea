@@ -17,7 +17,7 @@ import { Character, CharacterSchema } from './schemas/character.schema';
       isGlobal: true,
       validationSchema: joi.object({
         MONGODB_URI: joi.string().required(),
-        // PORT: joi.number().required()
+        PORT: joi.number().required()
       }),
       envFilePath: './apps/characters/.env'
     }),

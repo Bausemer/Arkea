@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "docker:up": "docker-compose -f docker-compose.yml -p arkea-backend up",
+    "docker:up": "docker-compose -f docker-compose.yml -p arkea-backend up --build -V",
     "build": "nest build",
     "start": "nest start",
     "start:dev": "nest start --watch",
