@@ -18,4 +18,16 @@ export class CharactersRepository {
   async create (character: Character_DTO): Promise<Character_DTO> {
     return this.characterModel.create(character);
   }
+
+  async getByName (name: string): Promise<Character_DTO> {
+    return this.characterModel.findOne({ name });
+  }
+
+  async deleteByName (name: string): Promise<Character_DTO> {
+    return this.characterModel.findOneAndDelete({ name });
+  }
+
+  async count (): Promise<number> {
+    return this.characterModel.count({});
+  }
 }
