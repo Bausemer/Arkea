@@ -12,8 +12,9 @@ function assertNodeEnv (env: NodeJS.ProcessEnv): env is NodeJS.ProcessEnv & { NO
 }
 
 /** Gets environment variables from the `.env` files */
-export function getEnvVariables<T extends string> (): Partial<Record<T, string>> & { NODE_ENV: NodeEnv; } {
+export function getEnvVariables<T extends string> (pathToEnvFile?: string): Partial<Record<T, string>> & { NODE_ENV: NodeEnv; } {
   let NODE_ENV: NodeEnv;
+  let varsOfSpecifiedEnvFile: Partial<Record<T, string>> = {}; 
 
   if (assertNodeEnv(process.env))
     NODE_ENV = process.env.NODE_ENV;
@@ -22,12 +23,18 @@ export function getEnvVariables<T extends string> (): Partial<Record<T, string>>
     NODE_ENV = 'development';
   }
 
+  if (pathToEnvFile)
+    varsOfSpecifiedEnvFile = {
+      ...config({ path: pathToEnvFile }).parsed,
+    } as Record<T, string>;
+
   let vars: Partial<Record<T, string>> = {};
 
   if (NODE_ENV !== 'production') {
     vars = {
       ...config().parsed,
       ...config({ path: '.env.local' }).parsed,
+      ...varsOfSpecifiedEnvFile,
     } as Record<T, string>;
 
     const isNotLocal = ['qa'].includes(NODE_ENV);
