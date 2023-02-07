@@ -1,4 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post } from '@nestjs/common';
+
+import { Character_DTO } from '~libs/dtos/Character.dto';
 
 import { CharactersService } from './characters.service';
 
@@ -6,10 +8,8 @@ import { CharactersService } from './characters.service';
 export class CharactersController {
   constructor(private readonly charactersService: CharactersService) {}
 
-  @Get()
-  getHello (): string {
-    console.log('CHARACTERS');
-    
-    return this.charactersService.getHello();
+  @Post('/createCharacter')
+  async createCharacter (character: Character_DTO): Promise<Character_DTO> {
+    return this.charactersService.createCharacter(character);
   }
 }

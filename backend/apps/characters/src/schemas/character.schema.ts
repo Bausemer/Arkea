@@ -1,9 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
-import { AbstractDocument } from '~libs/abstractDatabase';
+import { Character_DTO } from '~libs/dtos/Character.dto';
 
-@Schema({ versionKey: false })
-export class Character extends AbstractDocument{
+@Schema({ versionKey: false, collection: 'Characters' })
+export class Character extends Character_DTO {
   @Prop()
   name: string;
 

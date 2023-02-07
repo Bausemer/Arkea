@@ -37,13 +37,22 @@
         "tsConfigPath": "apps/auth/tsconfig.app.json"
       }
     },
-    "abstractDatabase": {
+    "config": {
       "type": "library",
-      "root": "libs/abstractDatabase",
+      "root": "libs/config",
       "entryFile": "index",
-      "sourceRoot": "libs/abstractDatabase/src",
+      "sourceRoot": "libs/config/src",
       "compilerOptions": {
-        "tsConfigPath": "libs/abstractDatabase/tsconfig.lib.json"
+        "tsConfigPath": "libs/config/tsconfig.lib.json"
+      }
+    },
+    "dtos": {
+      "type": "library",
+      "root": "libs/dtos",
+      "entryFile": "index",
+      "sourceRoot": "libs/dtos/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/dtos/tsconfig.lib.json"
       }
     }
   }

@@ -1,20 +1,21 @@
-import { Connection, Model } from 'mongoose';
+import { Model } from 'mongoose';
 
 import { Injectable, Logger } from '@nestjs/common';
-import { InjectConnection, InjectModel } from '@nestjs/mongoose';
+import { InjectModel } from '@nestjs/mongoose';
 
-import { AbstractRepository } from '~libs/abstractDatabase';
+import { Character_DTO } from '~libs/dtos/Character.dto';
 
 import { Character } from './schemas/character.schema';
 
 @Injectable()
-export class CharactersRepository extends AbstractRepository<Character> {
+export class CharactersRepository {
   protected readonly logger = new Logger(CharactersRepository.name);
 
   constructor (
-    @InjectModel(Character.name) characterModel: Model<Character>,
-    @InjectConnection() connection: Connection
-  ) {
-    super(characterModel, connection)
+    @InjectModel(Character.name) private readonly characterModel: Model<Character>,
+  ) { }
+
+  async create(character: Character): Promise<Character_DTO> {
+    return this.characterModel.create(character);
   }
 }

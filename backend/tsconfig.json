@@ -18,11 +18,17 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "~libs/abstractDatabase": [
-        "libs/abstractDatabase/src"
+      "~libs/config": [
+        "libs/config/src"
       ],
-      "~libs/abstractDatabase/*": [
-        "libs/abstractDatabase/src/*"
+      "~libs/config/*": [
+        "libs/config/src/*"
+      ],
+      "~libs/dtos": [
+        "libs/dtos/src"
+      ],
+      "~libs/dtos/*": [
+        "libs/dtos/src/*"
       ]
     }
   }
