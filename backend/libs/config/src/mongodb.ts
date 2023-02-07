@@ -21,7 +21,5 @@ export function getConnection (): [string, MongooseModuleOptions] {
   const connectionString = `mongodb://${user}@${host}/${queryString}`;
   const options = { dbName: env.MONGODB_DB_DATABASE }
   
-  console.log(connectionString)
-
   return [connectionString, options];
 }

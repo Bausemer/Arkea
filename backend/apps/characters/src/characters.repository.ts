@@ -1,6 +1,6 @@
 import { Model } from 'mongoose';
 
-import { Injectable, Logger } from '@nestjs/common';
+import { ConsoleLogger, Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
 import { Character_DTO } from '~libs/dtos/Character.dto';
@@ -15,7 +15,7 @@ export class CharactersRepository {
     @InjectModel(Character.name) private readonly characterModel: Model<Character>,
   ) { }
 
-  async create(character: Character): Promise<Character_DTO> {
+  async create (character: Character_DTO): Promise<Character_DTO> {
     return this.characterModel.create(character);
   }
 }

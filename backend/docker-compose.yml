@@ -1,23 +1,23 @@
 version: '2'
 
 services:
-  # characters:
-  #   container_name: characters
-  #   build: 
-  #     context: .
-  #     dockerfile: ./apps/characters/Dockerfile
-  #     target: development
-  #   command: npm run start:dev characters
-  #   env_file:
-  #     - ./apps/characters/.env 
-  #   depends_on:
-  #     - mongo-db
-  #   volumes:
-  #     - .:/usr/src/app
-  #     - /usr/src/app/node_modules 
-  #   ports:
-  #     - '3001:3001'
-  #   restart: unless-stopped
+  characters:
+    container_name: characters
+    build: 
+      context: .
+      dockerfile: ./apps/characters/Dockerfile
+      target: development
+    command: npm run start:dev characters
+    env_file:
+      - ./apps/characters/.env 
+    depends_on:
+      - mongo-db
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules 
+    ports:
+      - 3001:3001
+    restart: unless-stopped
   mongo-db:
     container_name: mongo-db
     image: mongo
