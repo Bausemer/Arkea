@@ -1,6 +1,22 @@
 version: '2'
 
 services:
+  arkea:
+    container_name: arkea
+    build: 
+      context: .
+      dockerfile: ./apps/arkea/Dockerfile
+      target: development
+    command: npm run start:dev arkea
+    env_file:
+      - ./apps/arkea/.env 
+    depends_on:
+      - mongo-db
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules 
+    ports:
+      - 3000:3000
   characters:
     container_name: characters
     build: 
@@ -15,9 +31,6 @@ services:
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules 
-    ports:
-      - 3001:3001
-    restart: unless-stopped
   mongo-db:
     container_name: mongo-db
     image: mongo
@@ -34,4 +47,9 @@ services:
       - ${MONGODB_PORT}:27017
     volumes:
       - ./db/mongodb/data/db/:/data/db/
-      - ./db/mongodb/data/log/:/var/log/mongodb/ 
+      - ./db/mongodb/data/log/:/var/log/mongodb/
+  rabbitmq:
+    container_name: rabbit-mq
+    image: rabbitmq
+    ports:
+      - 5672:5672

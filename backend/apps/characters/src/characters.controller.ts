@@ -1,4 +1,7 @@
+import { Observable } from 'rxjs';
+
 import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post } from '@nestjs/common';
+import { Ctx, EventPattern, Payload, RmqContext } from '@nestjs/microservices';
 
 import { Character_DTO } from '~libs/dtos/Character.dto';
 
@@ -10,9 +13,11 @@ export class CharactersController {
     private readonly charactersService: CharactersService
   ) { }
 
-  @Post('create')
-  async create (@Body() character: Character_DTO): Promise<Character_DTO> {
+  @EventPattern('createCharacter')
+  async create (@Payload() { character }:{ character: Character_DTO }, @Ctx() context: RmqContext): Promise<Character_DTO> {
+    console.log('Payload', character)
     const result = await this.charactersService.create(character);
+    console.log('Mongo-Result', result)
     if (!result) throw new HttpException('Character with this name is already existing!', HttpStatus.BAD_REQUEST);
     return result;
   }

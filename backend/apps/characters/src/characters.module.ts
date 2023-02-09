@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { getConnection } from '~libs/config/mongodb';
+import { RabbitMqModule } from '~libs/rabbit-mq';
 
 import { CharactersController } from './characters.controller';
 import { CharactersRepository } from './characters.repository';
@@ -12,6 +13,7 @@ import { Character, CharacterSchema } from './schemas/character.schema';
   imports: [
     MongooseModule.forRoot(...getConnection()),
     MongooseModule.forFeature([{ name: Character.name, schema: CharacterSchema }]),
+    RabbitMqModule,
   ],
   controllers: [CharactersController],
   providers: [
