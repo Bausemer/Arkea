@@ -15,12 +15,7 @@ export class AppService {
   ) { }
 
   async createCharacter (character: Character_DTO): Promise<Character_DTO> {
-    const response = await firstValueFrom(this.charactersClient.emit<Character_DTO>('createCharacter', {
-      character
-    }))
-
-    console.log('AppService', response);
-    return response;
+    return firstValueFrom(this.charactersClient.send<Character_DTO>('createCharacter', { character }))
   }
 
   getHello(): string {

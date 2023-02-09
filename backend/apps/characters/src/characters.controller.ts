@@ -15,10 +15,7 @@ export class CharactersController {
 
   @EventPattern('createCharacter')
   async create (@Payload() { character }:{ character: Character_DTO }, @Ctx() context: RmqContext): Promise<Character_DTO> {
-    console.log('Payload', character)
     const result = await this.charactersService.create(character);
-    console.log('Mongo-Result', result)
-    if (!result) throw new HttpException('Character with this name is already existing!', HttpStatus.BAD_REQUEST);
     return result;
   }
 
