@@ -27,7 +27,7 @@ export class CharactersRepository {
     return this.characterModel.findOneAndDelete({ name });
   }
 
-  async count (): Promise<number> {
-    return this.characterModel.count({});
+  async listCharacters (): Promise<Character_DTO[]> {
+    return this.characterModel.find({});
   }
 }

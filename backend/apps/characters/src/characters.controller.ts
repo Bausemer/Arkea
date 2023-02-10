@@ -1,6 +1,4 @@
-import { Observable } from 'rxjs';
-
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { Ctx, EventPattern, Payload, RmqContext } from '@nestjs/microservices';
 
 import { Character_DTO } from '~libs/dtos/Character.dto';
@@ -19,19 +17,19 @@ export class CharactersController {
     return result;
   }
 
-  @Get('getByName/:name')
-  async getByName (@Param('name') name: string): Promise<Character_DTO> {
-    console.log(name)
+  @EventPattern('getByName')
+  async getByName (@Payload() { name }:{ name: string }, @Ctx() context: RmqContext ): Promise<Character_DTO> {
     return this.charactersService.getByName(name);
   }
 
-  @Delete('deleteByName/:name')
-  async deleteByName (@Param('name') name: string): Promise<Character_DTO> {
+  @EventPattern('deleteByName')
+  async deleteByName (@Payload() { name }:{ name: string }, @Ctx() context: RmqContext ): Promise<Character_DTO> {
     return this.charactersService.deleteByName(name);
   }
 
-  @Get()
-  async count (): Promise<number> {
-    return this.charactersService.count();
+  @EventPattern('listCharacters')
+  async listCharacters (): Promise<Character_DTO[]> {
+    return this.charactersService.listCharacters();
   }
+
 }

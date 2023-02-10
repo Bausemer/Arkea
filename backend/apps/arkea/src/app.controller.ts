@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post } from '@nestjs/common';
 
 import { Character_DTO } from '~libs/dtos/Character.dto';
 
@@ -15,8 +15,27 @@ export class AppController {
     return result;
   }
 
+  @Get('getByName/:name')
+  async getByName (@Param('name') name: string): Promise<Character_DTO> {
+    const result = await this.appService.getCharacterByName(name);
+    if (!result) throw new HttpException(`There is no character with the name '${name}'!`, HttpStatus.BAD_REQUEST);
+    return result;
+  }
+
+  @Delete('deleteByName/:name')
+  async deleteByName (@Param('name') name: string): Promise<Character_DTO> {
+    const result = await this.appService.deleteCharacterByName(name);
+    if (!result) throw new HttpException(`There is no character with the name '${name}'!`, HttpStatus.BAD_REQUEST);
+    return result;
+  }
+
+  @Get('listCharacters')
+  async listCharacters (): Promise<Character_DTO[]> {
+    return this.appService.listCharacters();
+  }
+
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  ping (): string {
+    return 'AppController 👍'
   }
 }

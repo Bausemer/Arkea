@@ -25,7 +25,7 @@ export class CharactersService {
     return this.characterRepository.deleteByName(name);
   }
 
-  async count (): Promise<number> {
-    return this.characterRepository.count();
+  async listCharacters (): Promise<Character_DTO[]> {
+    return this.characterRepository.listCharacters();
   }
 }

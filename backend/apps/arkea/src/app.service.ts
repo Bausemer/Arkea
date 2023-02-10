@@ -15,10 +15,18 @@ export class AppService {
   ) { }
 
   async createCharacter (character: Character_DTO): Promise<Character_DTO> {
-    return firstValueFrom(this.charactersClient.send<Character_DTO>('createCharacter', { character }))
+    return firstValueFrom(this.charactersClient.send<Character_DTO>('createCharacter', { character }));
   }
 
-  getHello(): string {
-    return 'Hello World!';
+  async getCharacterByName (name: string): Promise<Character_DTO> {
+    return firstValueFrom(this.charactersClient.send<Character_DTO>('getByName', { name }));
+  }
+
+  async deleteCharacterByName (name: string): Promise<Character_DTO> {
+    return firstValueFrom(this.charactersClient.send<Character_DTO>('deleteByName', { name }));
+  }
+
+  async listCharacters (): Promise<Character_DTO[]> {
+    return firstValueFrom(this.charactersClient.send<Character_DTO[]>('listCharacters', {} ));
   }
 }
