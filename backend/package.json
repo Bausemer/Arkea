@@ -6,6 +6,10 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "minikube:start": "minikube start",
+    "minikube:delete": "minikube delete --all",
+    "minikube:dashboard": "minikube dashboard",
+    "minikube:service": "minikube service",
     "docker:up": "docker-compose -f docker-compose.yml -p arkea-backend up --build -V",
     "build": "nest build",
     "start": "nest start",
