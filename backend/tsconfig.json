@@ -6,7 +6,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "target": "es2017",
+    "target": "es2020",
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
@@ -35,7 +35,14 @@
       ],
       "~libs/rabbit-mq/*": [
         "libs/rabbit-mq/src/*"
-      ]
+      ],
+      "~libs/scripts": [
+        "libs/scripts/src"
+      ],
     }
-  }
+  },
+  "exclude": [
+    "scripts/**/dist",
+    "dist/"
+  ]
 }

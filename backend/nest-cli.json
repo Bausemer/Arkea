@@ -63,6 +63,6 @@
       "compilerOptions": {
         "tsConfigPath": "libs/rabbit-mq/tsconfig.lib.json"
       }
-    }
+    }    
   }
 }
