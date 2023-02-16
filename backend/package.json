@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "minikube:start": "minikube start",
+    "minikube:start": "minikube start --addons=ingress",
     "minikube:delete": "minikube delete --all",
     "minikube:dashboard": "minikube dashboard",
     "minikube:service": "minikube service",
@@ -16,8 +16,8 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/apps/arkea/main",
-    "script:zx:deploy": "zx ./scripts/deployment.mjs",
-    "script:zx:destroy": "zx ./scripts/destruction.mjs"
+    "zx:deploy": "zx ./scripts/deployment.mjs",
+    "zx:destroy": "zx ./scripts/destruction.mjs"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { argv, chalk} from 'zx';
+import { chalk} from 'zx';
 import { runScript } from './runScript.mjs';
 
 const DIRECTORY = 'k8s'
@@ -11,7 +11,10 @@ const FILES = [
   'mongo-express.yaml',
 ];
 
+const NAMESPACE = "mongo-example";
+
 void (async function () {
+  await runKubectlCreateNamespace(NAMESPACE);
   for (const file of FILES) 
     runKubectlApply(path.join(DIRECTORY, file));
 })();
@@ -29,5 +32,16 @@ function runKubectlApply (filename) {
   return runScript(`kubectl apply -f ${filename}`)
     .catch((e) => {
       console.log(chalk.red(e));
+    });
+}
+
+/**
+ * @param {string} namespace
+ * @returns {Promise<void>}
+ */
+function runKubectlCreateNamespace (namespace) {
+  return runScript(`kubectl create namespace ${namespace}`)
+    .catch((e) => {
+      console.log(chalk.red(`Log: ${e}`));
     });
 }

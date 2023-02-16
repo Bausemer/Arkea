@@ -2,8 +2,6 @@
 import { chalk} from 'zx';
 import { runScript } from './runScript.mjs';
 
-const DIRECTORY = 'k8s'
-
 const DEPLOYMENTS = [
   'mongo-express',
   'mongodb-deployment'
@@ -18,12 +16,19 @@ const SERVICES = [
 const SECRETS = [
   'mongodb-secret'
 ];
+const INGRESSES = [
+  'mongo-ingress'
+];
+
+const NAMESPACE = "mongo-example";
 
 void (async function () {
-  for (const deployment of DEPLOYMENTS) runKubectlDelete('deployment', deployment);
+  for (const ingress of INGRESSES) runKubectlDelete('ingress', ingress);
   for (const service of SERVICES) runKubectlDelete('service', service);
+  for (const deployment of DEPLOYMENTS) runKubectlDelete('deployment', deployment);
   for (const configMap of CONFIG_MAPS) runKubectlDelete('configmap', configMap);
   for (const secret of SECRETS) runKubectlDelete('secret', secret);
+  runKubectlDelete('namespace', NAMESPACE);
 })();
 
 /**
