@@ -19,7 +19,8 @@ export class CharactersRepository {
     return this.characterModel.create(character);
   }
 
-  async getByName (name: string): Promise<Character_DTO> {
+  async getByName (name: string, omitID?: boolean): Promise<Character_DTO> {
+    if(omitID) return this.characterModel.findOne({name})
     return this.characterModel.findOne({ name });
   }
 

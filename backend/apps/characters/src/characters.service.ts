@@ -18,7 +18,7 @@ export class CharactersService {
   }
 
   async getByName (name: string): Promise<Character_DTO> {
-    return this.characterRepository.getByName(name);
+    return this.characterRepository.getByName(name, true);
   }
 
   async deleteByName (name: string): Promise<Character_DTO> {

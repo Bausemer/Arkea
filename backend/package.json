@@ -16,15 +16,17 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/apps/arkea/main",
-    "zx:deploy": "zx ./scripts/deployment.mjs",
-    "zx:destroy": "zx ./scripts/destruction.mjs"
+    "zx:deploy:mongoExample": "zx ./scripts/mongoExample.deployment.mjs",
+    "zx:deploy:arkea": "zx ./scripts/arkea.deployment.mjs"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.3.0",
     "@nestjs/core": "^9.0.0",
+    "@nestjs/jwt": "^10.0.2",
     "@nestjs/microservices": "^9.3.5",
     "@nestjs/mongoose": "^9.2.1",
+    "@nestjs/passport": "^9.0.3",
     "@nestjs/platform-express": "^9.0.0",
     "amqp-connection-manager": "^4.1.10",
     "amqplib": "^0.10.3",
@@ -32,6 +34,7 @@
     "class-validator": "^0.14.0",
     "joi": "^17.7.0",
     "mongoose": "^6.9.0",
+    "passport-jwt": "^4.0.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",
     "zx": "^7.1.1"
