@@ -31,6 +31,20 @@ services:
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules 
+  auth:
+    container_name: auth
+    build: 
+      context: .
+      dockerfile: ./apps/auth/Dockerfile
+      target: development
+    command: npm run start:dev auth
+    env_file:
+      - ./apps/auth/.env 
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules 
+    ports:
+      - 3001:3001 
   mongo-db:
     container_name: mongo-db
     image: mongo
